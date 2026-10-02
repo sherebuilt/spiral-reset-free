@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Spiral Reset — Free SheRebuilt Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAF4EA; --ink:#3A2E2A; --muted:#7A6A63; --rose:#C9847A; --drose:#A4665D;
+  --lrose:#F1DED8; --sage:#8FA08A; --lsage:#E1E8DB; --field:#FFFDF9; --fborder:#D2A49B;
+  --radius:10px;
+  font-family:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--cream);color:var(--ink);
+  -webkit-text-size-adjust:100%;}
+body{padding-bottom:70px;}
+h1,h2,h3{font-family:'Lora',Georgia,serif;font-weight:500;margin:0 0 10px}
+p{line-height:1.6;margin:0 0 14px;font-size:15px}
+.wrap{max-width:640px;margin:0 auto;padding:18px 20px 30px}
+.cover{text-align:center;padding:56px 24px 40px;position:relative}
+.cover .eyebrow{letter-spacing:4px;font-size:11px;color:var(--drose);font-weight:600}
+.cover h1{font-size:38px;line-height:1.15;margin:10px 0}
+.cover .sub{font-family:'Lora',serif;font-style:italic;color:var(--ink);font-size:15px;line-height:1.8;margin-top:14px}
+.cover .brand{margin-top:34px;font-size:12px;letter-spacing:2px;color:var(--drose);font-weight:600}
+.divider{width:38px;height:2px;background:var(--rose);margin:14px auto;border:none}
+.chip{display:inline-block;background:var(--lrose);color:var(--drose);font-weight:600;
+  font-size:11px;letter-spacing:1.5px;padding:5px 14px;border-radius:20px;margin-bottom:14px}
+.day-title{font-size:24px;margin-bottom:4px}
+.title-rule{width:34px;height:2px;background:var(--rose);border:none;margin:0 0 16px}
+.callout{background:var(--lrose);border-radius:8px;padding:16px 18px;margin:0 0 16px;
+  font-family:'Lora',serif;font-style:italic;color:var(--drose);font-size:15px;line-height:1.6}
+label.flabel{display:block;font-weight:500;font-size:13.5px;margin:0 0 6px}
+textarea,input[type=text]{width:100%;background:var(--field);border:1px solid var(--fborder);
+  border-radius:8px;padding:11px 12px;font-family:'Poppins',sans-serif;font-size:15px;color:var(--ink);
+  resize:vertical}
+textarea{min-height:64px}
+textarea.big{min-height:100px}
+.field-wrap{margin-bottom:16px}
+.saved-tag{font-size:10.5px;color:var(--sage);opacity:0;transition:opacity .4s;float:right;font-weight:600}
+.saved-tag.show{opacity:1}
+.check-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;cursor:pointer}
+.check-row input{width:18px;height:18px;margin-top:1px;accent-color:var(--rose);flex-shrink:0}
+.check-row span{font-size:14.5px;line-height:1.4}
+.rating-wrap{margin-bottom:18px}
+.rating-row{display:flex;justify-content:space-between;gap:4px;margin-top:8px}
+.rating-opt{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.rating-opt input{width:20px;height:20px;accent-color:var(--rose)}
+.rating-opt span{font-size:10.5px;color:var(--muted)}
+.rating-caps{display:flex;justify-content:space-between;font-size:10.5px;font-style:italic;
+  color:var(--muted);margin-top:4px}
+.choice-row{display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 4px}
+.choice-opt{display:flex;align-items:center;gap:7px}
+.choice-opt input{width:18px;height:18px;accent-color:var(--rose)}
+.tick-one{font-size:11.5px;color:var(--muted);font-style:italic;font-weight:400}
+table.grid{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:12.5px}
+table.grid th{background:var(--lrose);color:var(--drose);font-weight:600;font-size:10.5px;
+  letter-spacing:.5px;padding:8px 6px;text-align:left}
+table.grid td{border:1px solid var(--lrose);padding:5px;vertical-align:top}
+table.grid td textarea{min-height:44px;font-size:12.5px;padding:6px}
+table.grid td input[type=text]{padding:6px;font-size:12.5px}
+.day-nav{background:var(--field);border:1px solid var(--fborder);border-radius:8px;
+  padding:10px 12px;font-size:14px;width:100%;margin-bottom:8px;color:var(--ink);
+  font-family:'Poppins',sans-serif}
+.topbar{position:sticky;top:0;background:var(--cream);z-index:5;padding:10px 20px;
+  border-bottom:1px solid var(--lrose);display:flex;gap:10px;align-items:center}
+.topbar select{flex:1}
+hr.sep{border:none;border-top:1px solid var(--lrose);margin:34px 0}
+.section{scroll-margin-top:64px}
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:var(--cream);
+  border-top:1px solid var(--lrose);padding:10px 16px;display:flex;gap:10px;
+  justify-content:center;z-index:5}
+.btn{border:none;border-radius:20px;padding:10px 18px;font-size:13px;font-weight:600;
+  cursor:pointer;font-family:'Poppins',sans-serif}
+.btn-primary{background:var(--rose);color:#fff}
+.btn-secondary{background:transparent;color:var(--drose);border:1px solid var(--rose)}
+.closing{text-align:center;padding:40px 20px}
+.closing h2{font-size:21px;line-height:1.4}
+.closing .italic{font-family:'Lora',serif;font-style:italic;color:var(--drose);font-size:15px;
+  line-height:1.7;margin:14px 0 22px}
+.closing .box{background:var(--lrose);border-radius:8px;padding:18px;font-size:13px;
+  font-weight:600;line-height:1.9}
+.closing .box .b{color:var(--ink)}
+.closing .box .r{color:var(--drose)}
+.footnote{font-size:12px;color:var(--muted);margin-top:-6px;margin-bottom:16px}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --cream:#1E1815; --ink:#EFE6DF; --muted:#B7A89F; --field:#2A221D; --fborder:#5C4B43;
+    --lrose:#3A2724; --lsage:#26332A;
+  }
+}
+:root[data-theme="dark"]{
+  --cream:#1E1815; --ink:#EFE6DF; --muted:#B7A89F; --field:#2A221D; --fborder:#5C4B43;
+  --lrose:#3A2724; --lsage:#26332A;
+}
+
+.gift{text-align:center;padding:44px 24px 28px}
+.gift .eyebrow{letter-spacing:4px;font-size:11px;color:var(--drose);font-weight:600}
+.gift h1{font-size:32px;line-height:1.2;margin:10px 0}
+.gift .sub{font-family:'Lora',serif;font-style:italic;font-size:15px;line-height:1.7;margin-top:12px}
+.gift .brand{margin-top:28px;font-size:12px;letter-spacing:2px;color:var(--drose);font-weight:600}
+.cta{background:var(--lrose);border-radius:10px;padding:22px;text-align:center;margin:34px 20px 10px}
+.cta h3{font-size:18px;margin-bottom:8px}
+.cta p{font-size:13.5px;color:var(--ink);margin-bottom:16px}
+.cta a.btn-cta{display:inline-block;background:var(--rose);color:#fff;text-decoration:none;
+  padding:12px 26px;border-radius:22px;font-weight:600;font-size:14px}
+</style>
+</head>
+<body>
+
+<div class="gift">
+  <div class="eyebrow">A FREE SHEREBUILT TOOL</div>
+  <h1>The Spiral Reset</h1>
+  <div class="sub">For the moment it all feels like too much &mdash;<br>six questions to get you out of your head.</div>
+</div>
+
+<div class="wrap">
+<p>You know the feeling. One thought leads to another, and suddenly you're three scenarios deep into something that hasn't even happened. This page won't stop that from ever happening again &mdash; but it will give you somewhere to put it, right now, before you do something you'll want to undo later.</p>
+<p>Answer honestly. Nobody sees this but you, and it saves automatically on this device as you type.</p>
+</div>
+
+<section class="wrap section" id="spiral">
+  <div class="field-wrap">
+    <label class="flabel" for="free_triggered">WHAT TRIGGERED ME?<span class="saved-tag" id="tag_free_triggered">saved</span></label>
+    <textarea id="free_triggered" name="free_triggered" data-field="1"></textarea>
+  </div>
+  <div class="field-wrap">
+    <label class="flabel" for="free_thinking">WHAT AM I THINKING?<span class="saved-tag" id="tag_free_thinking">saved</span></label>
+    <textarea id="free_thinking" name="free_thinking" data-field="1"></textarea>
+  </div>
+  <div class="field-wrap">
+    <label class="flabel" for="free_afraid">WHAT AM I AFRAID OF?<span class="saved-tag" id="tag_free_afraid">saved</span></label>
+    <textarea id="free_afraid" name="free_afraid" data-field="1"></textarea>
+  </div>
+  <div class="field-wrap">
+    <label class="flabel" for="free_know">WHAT DO I ACTUALLY KNOW?<span class="saved-tag" id="tag_free_know">saved</span></label>
+    <textarea id="free_know" name="free_know" data-field="1"></textarea>
+  </div>
+  <div class="field-wrap">
+    <label class="flabel" for="free_need">WHAT DO I NEED?<span class="saved-tag" id="tag_free_need">saved</span></label>
+    <textarea id="free_need" name="free_need" data-field="1"></textarea>
+  </div>
+  <div class="field-wrap">
+    <label class="flabel" for="free_next">WHAT WILL I DO NEXT?<span class="saved-tag" id="tag_free_next">saved</span></label>
+    <textarea id="free_next" name="free_next" data-field="1"></textarea>
+  </div>
+
+  <div class="rating-wrap">
+    <label class="flabel">Intensity before <span class="tick-one">(tick one)</span></label>
+    <div class="rating-row"><label class="rating-opt"><input type="checkbox" id="free_before_1" data-field="1"><span>1</span></label><label class="rating-opt"><input type="checkbox" id="free_before_2" data-field="1"><span>2</span></label><label class="rating-opt"><input type="checkbox" id="free_before_3" data-field="1"><span>3</span></label><label class="rating-opt"><input type="checkbox" id="free_before_4" data-field="1"><span>4</span></label><label class="rating-opt"><input type="checkbox" id="free_before_5" data-field="1"><span>5</span></label><label class="rating-opt"><input type="checkbox" id="free_before_6" data-field="1"><span>6</span></label><label class="rating-opt"><input type="checkbox" id="free_before_7" data-field="1"><span>7</span></label><label class="rating-opt"><input type="checkbox" id="free_before_8" data-field="1"><span>8</span></label><label class="rating-opt"><input type="checkbox" id="free_before_9" data-field="1"><span>9</span></label><label class="rating-opt"><input type="checkbox" id="free_before_10" data-field="1"><span>10</span></label></div>
+    <div class="rating-caps"><span>barely there</span><span>completely consuming</span></div>
+  </div>
+  <div class="rating-wrap">
+    <label class="flabel">Intensity after <span class="tick-one">(tick one)</span></label>
+    <div class="rating-row"><label class="rating-opt"><input type="checkbox" id="free_after_1" data-field="1"><span>1</span></label><label class="rating-opt"><input type="checkbox" id="free_after_2" data-field="1"><span>2</span></label><label class="rating-opt"><input type="checkbox" id="free_after_3" data-field="1"><span>3</span></label><label class="rating-opt"><input type="checkbox" id="free_after_4" data-field="1"><span>4</span></label><label class="rating-opt"><input type="checkbox" id="free_after_5" data-field="1"><span>5</span></label><label class="rating-opt"><input type="checkbox" id="free_after_6" data-field="1"><span>6</span></label><label class="rating-opt"><input type="checkbox" id="free_after_7" data-field="1"><span>7</span></label><label class="rating-opt"><input type="checkbox" id="free_after_8" data-field="1"><span>8</span></label><label class="rating-opt"><input type="checkbox" id="free_after_9" data-field="1"><span>9</span></label><label class="rating-opt"><input type="checkbox" id="free_after_10" data-field="1"><span>10</span></label></div>
+    <div class="rating-caps"><span>barely there</span><span>completely consuming</span></div>
+  </div>
+</section>
+
+<div class="cta">
+  <h3>Need more than one page?</h3>
+  <p>This is one tool from <b>The 7-Day Overthinking Reset</b> &mdash; a full SheRebuilt&trade; workbook for untangling the spiral for good. Grab the complete version for $7.</p>
+  <a class="btn-cta" href="#">Get the full Reset &rarr;</a>
+</div>
+<div class="wrap" style="text-align:center;padding-bottom:30px">
+  <div style="font-family:'Lora',serif;font-size:15px;margin-top:10px">SheRebuilt&trade;</div>
+  <div style="font-size:10.5px;letter-spacing:2px;color:var(--drose);font-weight:600;margin-top:2px">DETACH. &nbsp;HEAL. &nbsp;REBUILD.</div>
+</div>
+
+<script>
+(function(){
+  var KEY_PREFIX = 'sr_free_spiral_';
+  function allFields(){ return document.querySelectorAll('[data-field]'); }
+  function save(el){
+    try{
+      var key = KEY_PREFIX + el.id;
+      var val = (el.type === 'checkbox') ? (el.checked ? '1' : '') : el.value;
+      localStorage.setItem(key, val);
+      var tag = document.getElementById('tag_' + el.id);
+      if(tag){ tag.classList.add('show'); setTimeout(function(){tag.classList.remove('show');}, 900); }
+    }catch(e){}
+  }
+  function restore(){
+    try{
+      allFields().forEach(function(el){
+        var v = localStorage.getItem(KEY_PREFIX + el.id);
+        if(v === null) return;
+        if(el.type === 'checkbox'){ el.checked = (v === '1'); } else { el.value = v; }
+      });
+    }catch(e){}
+  }
+  function wire(){
+    allFields().forEach(function(el){
+      var evt = (el.tagName === 'TEXTAREA' || el.type === 'text') ? 'input' : 'change';
+      el.addEventListener(evt, function(){
+        clearTimeout(el._saveTimer);
+        el._saveTimer = setTimeout(function(){ save(el); }, evt === 'input' ? 500 : 0);
+      });
+      if(evt === 'input'){
+        el.addEventListener('blur', function(){ clearTimeout(el._saveTimer); save(el); });
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function(){ restore(); wire(); });
+})();
+</script>
+</body>
+</html>
